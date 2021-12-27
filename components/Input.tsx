@@ -1,7 +1,9 @@
 import { FC, InputHTMLAttributes } from "react";
-import { Field } from "formik";
+import { Field, FieldProps, ErrorMessage } from "formik";
+import TextError from "./TextError";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
   label: string;
 }
 
@@ -17,7 +19,7 @@ const Input: FC<InputProps> = ({
     <div>
       {label && <label>{label}</label>}
       <Field name={name}>
-        {({ form }: any) => {
+        {({ form }: FieldProps) => {
           const { setFieldValue } = form;
           return (
             <input
@@ -35,6 +37,7 @@ const Input: FC<InputProps> = ({
           );
         }}
       </Field>
+      <ErrorMessage component={TextError} name={name} />
     </div>
   );
 };
