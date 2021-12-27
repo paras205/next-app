@@ -1,6 +1,9 @@
+import { AppProps } from "next/app";
+import { NextPage } from "next";
 import { wrapper } from "../store/store";
 
-function MyApp({ Component, pageProps }: any) {
+const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
   return <Component {...pageProps} />;
-}
+};
+
 export default wrapper.withRedux(MyApp);

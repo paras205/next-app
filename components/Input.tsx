@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 import { Field, FieldProps, ErrorMessage } from "formik";
 import TextError from "./TextError";
 
@@ -7,7 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-const Input: FC<InputProps> = ({
+const Input: React.FC<InputProps> = ({
   type = "text",
   placeholder,
   value,

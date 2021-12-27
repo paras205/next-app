@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
 import { Formik, Form, FormikHelpers, FormikState } from "formik";
 import Link from "next/link";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { ILogin } from "../types/auth";
-import { loginSchema } from "../schema/loginSchema";
+import { Input, Button } from "components";
+import { ILogin } from "interface";
+import { loginSchema } from "schema/loginSchema";
 
 const Login: NextPage = () => {
   const initialValues: ILogin = {

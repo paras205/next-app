@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { Formik, Form, FormikHelpers, FormikState } from "formik";
 import Link from "next/link";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { IRegister } from "../types/auth";
-import { RegistrationSchema } from "../schema/registerSchema";
+import actions from "store/actions/auth";
+import { Input, Button } from "components";
+import { IRegister } from "interface";
+import { RegistrationSchema } from "schema/registerSchema";
 
 const Register: NextPage = () => {
   const initialValues: IRegister = {
@@ -13,12 +14,20 @@ const Register: NextPage = () => {
     password: "",
     confirm: "",
   };
+  const dispatch = useDispatch();
   const onSubmit = async (
     values: IRegister,
     helpers: FormikHelpers<IRegister>
   ) => {
-    console.log(values, helpers);
+    dispatch(actions.register(values));
   };
+  const { loading } = useSelector(
+    (state: any) => ({
+      loading: state.global.loading,
+    }),
+    shallowEqual
+  );
+
   return (
     <Formik
       initialValues={initialValues}
@@ -55,7 +64,12 @@ const Register: NextPage = () => {
             placeholder="Re-enter your Password"
             label="Re-enter your Password"
           />
-          <Button text="Register" type="submit" disabled={isSubmitting} />
+          <Button
+            text="Register"
+            type="submit"
+            loading={loading}
+            disabled={isSubmitting}
+          />
           <Link href="/login">Already have an account? Go to login</Link>
         </Form>
       )}
